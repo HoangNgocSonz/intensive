@@ -17,25 +17,51 @@ public class Rectangle {
         this.width = width;
         this.height = height;
     }
-
-
-    public boolean intersects(Rectangle other) {
-        Vecto2D position;
-        int width;
-        int height;
-        position= this.position;
-        width = this.width;
-        height=this.height;
-
-        Rectangle rect = new Rectangle(position,width, height);
-        if((rect.position.x+rect.width>=other.position.x)&&(other.position.x+other.width>=rect.position.x)&&
-                (rect.position.y+rect.height>=other.position.y)&&(other.position.y+other.width>=rect.position.y))
-            return true;
-        else
-            return false;
+    double top()
+    {
+        return this.position.y;
     }
 
-    public static void main() {
+    double bottom()
+    {
+        return  this.top() + this.height;
+    }
+    double left()
+    {
+        return this.position.x;
+    }
+
+    double right()
+    {
+        return this.left() + this.width;
+    }
+
+
+    public boolean intersects(Rectangle other)
+    {
+        if( this.right() >= other.left() && other.right()>=this.left()
+        && this.bottom()>= other.top() && other.bottom()>=this.top() )
+            return  true;
+        else return false;
+    }
+
+//    public boolean intersects(Rectangle other) {
+//        Vecto2D position;
+//        int width;
+//        int height;
+//        position= this.position;
+//        width = this.width;
+//        height=this.height;
+//
+//        Rectangle rect = new Rectangle(position,width, height);
+//        if((rect.position.x+rect.width>=other.position.x)&&(other.position.x+other.width>=rect.position.x)&&
+//                (rect.position.y+rect.height>=other.position.y)&&(other.position.y+other.width>=rect.position.y))
+//            return true;
+//        else
+//            return false;
+//    }
+
+    public static void main(String[] args) {
         Rectangle rect1 = new Rectangle(0, 0, 5, 5);
         Rectangle rect2 = new Rectangle(3, 3, 5, 5);
         Rectangle rect3 = new Rectangle(6, 6, 5, 5);

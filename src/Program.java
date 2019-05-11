@@ -6,13 +6,11 @@ import java.awt.event.KeyEvent;
 public class Program{
     public static void main(String[] args){
 
-        Rectangle.main();
         System.out.println(System.currentTimeMillis());
 
         long time=System.currentTimeMillis()/1000/60/60/24/365;
-        //System.out.println(time);
         JFrame window = new JFrame();
-        GamePanel panel = new GamePanel();
+        GamePanel panel = new GamePanel();////
         panel.setBackground(Color.YELLOW);
         panel.setPreferredSize(new Dimension(800,600));
 
@@ -36,6 +34,10 @@ public class Program{
                 if(e.getKeyCode()==KeyEvent.VK_D){
                     KeyEventPress.isRight = true;
                 }
+                if(e.getKeyCode()==KeyEvent.VK_SPACE){
+                    KeyEventPress.isFirePress = true;
+                }
+
             }
             @Override
             public void keyReleased(KeyEvent e) {
@@ -51,7 +53,9 @@ public class Program{
                 if(e.getKeyCode()==KeyEvent.VK_D){
                     KeyEventPress.isRight = false;
                 }
-
+                if(e.getKeyCode()==KeyEvent.VK_SPACE){
+                    KeyEventPress.isFirePress = false;
+                }
             }
         };
         window.addKeyListener(KeyHanled);
