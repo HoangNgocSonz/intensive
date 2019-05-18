@@ -1,25 +1,41 @@
-package game;
+package game.player;
 
+import game.GameObject;
+import game.Vecto2D;
+import game.enemy.Enemy;
+import game.physics.BoxCollider;
 import tklibs.SpriteUtils;
 
-import java.awt.*;
-import java.awt.image.BufferedImage;
 
-public class PlayerBullet {
-
-    public Vecto2D position;
-    public BufferedImage image;
+public class PlayerBullet extends GameObject {
+    //public int damage;
+    public int damage;
 
     public PlayerBullet(){
-        this.position=new Vecto2D();
         this.image = SpriteUtils.loadImage("assets/images/player-bullets/a/1.png");
+        velocity.set(0,5);
+        hitBox = new BoxCollider(this,24,24);
+        damage =1;
     }
 
-    public void render (Graphics g){
-        g.drawImage(this.image, (int) this.position.x,(int) this.position.y,null);
-    }
+    @Override
     public void run(){
-        this.position.y -= 6;
+        super.run();
+        this.checkEnemy();
+        this.deactiveIfNeeded();
     }
+    private void checkEnemy(){
+        Enemy enemy = GameObject.findIntersects(Enemy.class, hitBox);
+        if(enemy != null){
+            enemy.takeDamage(damage);
+            this.deactive();
+        }
+    }
+    public void deactiveIfNeeded(){
+        if(position.y <30){
+            this.deactive();
+        }
+    }
+
 }
 

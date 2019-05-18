@@ -1,3 +1,5 @@
+package game;
+
 public class Rectangle {
 
     public Vecto2D position;
